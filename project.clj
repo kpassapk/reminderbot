@@ -2,8 +2,8 @@
   :description "A bot for Slack for sending reminders to yourself in the future "
   :url "https://github.com/ghaskins/reminderbot"
   :plugins [[lein-cljfmt "0.9.0"]]
-  :dependencies [[org.clojure/clojure "1.11.1"]
-                 [org.clojure/core.async "1.6.673"]
+  :dependencies [[org.clojure/clojure "1.11.3"]
+                 [org.clojure/core.async "1.6.681"]
                  [org.clojure/tools.cli "1.0.214"]
                  [environ "1.2.0"]
                  [integrant "0.8.0"]
@@ -12,12 +12,13 @@
                  [cheshire "5.11.0"]
                  [clojure.java-time "1.2.0"]
                  [com.zoho/hawking "0.1.7"]
-                 [com.taoensso/timbre "6.0.4"]
                  [com.fzakaria/slf4j-timbre "0.3.21"]
                  [org.slf4j/jul-to-slf4j "2.0.5"]
                  [org.slf4j/jcl-over-slf4j "2.0.5"]
                  [org.slf4j/log4j-over-slf4j "2.0.5"]
-                 [io.github.manetu/temporal-sdk "0.12.1"]]
+                 [io.github.manetu/temporal-sdk "1.0.1"]
+                 [cider/cider-nrepl "0.45.0"]
+                 [refactor-nrepl/refactor-nrepl "3.6.0"]]
   :main ^:skip-aot reminderbot.main
 
   :target-path "target/%s"

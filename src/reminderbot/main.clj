@@ -8,7 +8,10 @@
             [promesa.core :as p]
             [reminderbot.config :as config]
             [reminderbot.system :as system]
-            [reminderbot.core :as core])
+            [reminderbot.core :as core]
+            [cider.nrepl :refer [cider-nrepl-handler]]
+            [nrepl.server :as repl]
+            [nrepl.cmdline :as nrepl-cmd])
   (:gen-class))
 
 (log/set-config!
@@ -45,6 +48,8 @@
      (uncaughtException [_ thread ex]
        (f thread ex)))))
 
+(def repl-server (atom nil))
+
 (defn exec
   [{:keys [config] :as _options}]
   (p/create
@@ -53,6 +58,10 @@
       (fn [^Thread thread ex]
         (log/error "uncaught exception in thread:" (.getName thread))
         (reject ex)))
+
+     (reset! repl-server (repl/start-server :port 7890 :handler cider-nrepl-handler))
+     (log/info "REPL started on port 7890")
+
      (system/start core/components config)
      (log/info "System running"))))
 
@@ -82,4 +91,3 @@
 (defn -main
   [& args]
   (System/exit (apply -app args)))
-
